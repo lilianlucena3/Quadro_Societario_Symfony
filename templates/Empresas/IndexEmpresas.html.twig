@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block title %} Listar Empresas {% endblock %}
+
+{% block body %}
+<a href="http://localhost/quadro_societario/public/empresas/criar" class="btn btn-primary">Abrir Empresa</a><p></p>
+    {% if empresas %}
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Razão Social</th>
+                    <th>Cnpj</th>
+                    <th>Ações</th>
+                </tr> 
+            </thead>
+            <tbody>
+                {%for empresa in empresas %}
+                    <tr>    
+                        <td>{{empresa.razaoSocial}}</td>
+                        <td>{{empresa.coCnpj}}</td>
+                        <td>
+                        <a href="http://localhost/quadro_societario/public/empresas/{{ empresa.nuSeqEmpresa }}" class="btn btn-success">Ver</a>
+                        <a href="http://localhost/quadro_societario/public/empresas/editar/{{ empresa.nuSeqEmpresa }}" class="btn btn-warning">Editar</a>
+                        <a href="http://localhost/quadro_societario/public/empresas/baixar/{{ empresa.nuSeqEmpresa }}" class="btn btn-danger" data-id="{{ empresa.nuSeqEmpresa }}">Baixar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p> Não existe empresa cadastrada </p>
+    {% endif %}
+{% endblock %}
